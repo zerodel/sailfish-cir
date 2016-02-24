@@ -4,6 +4,10 @@
 # Readme: version 0.1 alpha , maybe, 
 #
 
+
+import os
+import functools
+
 __doc__ = ''' Sailfish-cir ver 0.1
 --------------
 Usage: python sailfish_cir.py [options]
@@ -16,19 +20,13 @@ Options:
     -1  path to your pair-end reads , mate 1
     -2  path to your pair-end reads, mate 2
     -o  output folder that contains your quantification results
-    -k  Kmer size used by sailfish to built index.
+    -k  K-mer size used by sailfish to built index.
     --libtype   format string describing the library type of your reads.
     -h/--help   print this help message
     -c  path to CIRI output file to specify circular RNA, if provided, the -o result will contain estimation of circular transcript as well as linear ones.
 '''
 
 __author__ = 'zerodel'
-
-import os
-import sys
-import functools
-
-
 
 GFFREAD_CMD = "gffread"
 SAILFISH_CMD = "sailfish"
@@ -38,17 +36,20 @@ def tmpp(str_tmp):
     print("---> %s" % str_tmp)
 
 
-######custom error defined here
+# custom error defined here
 class GTFerr(Exception):
     pass
 
+
 class GTFitem_err(GTFerr):
-    '''base class of exception of seqfile item utility
+    '''base class of exception of seq-file item utility
     '''
     pass
 
+
 class ThisShouldBeAFolder(Exception):
     pass
+
 
 class AttributionIncomplete(GTFitem_err):
     '''
@@ -56,8 +57,10 @@ class AttributionIncomplete(GTFitem_err):
     '''
     pass
 
+
 class No_gene_id_in_gtf(AttributionIncomplete):
     pass
+
 
 class No_transcript_id_in_gtf(AttributionIncomplete):
     pass
@@ -66,8 +69,10 @@ class No_transcript_id_in_gtf(AttributionIncomplete):
 class SAMerr(Exception):
     pass
 
+
 class No_Attribute_Sting_in_gtf(GTFitem_err):
     pass
+
 
 class NoSuchFile(IOError):
     pass
@@ -75,6 +80,7 @@ class NoSuchFile(IOError):
 
 class WrongArguments(Exception):
     pass
+
 
 # some fundamental classes. eg, gtf entry in gtf file, or ciri entry in CIRI output.
 class GTFitem(object):
@@ -153,7 +159,7 @@ class GTFitem(object):
         self._strand = strand
 
     def _parse_line(self, line_in_gtf, type_filter=""):
-        """ parse a line in seqfile file ,
+        """ parse a line in seq-file file ,
         only gene id and transcript id will be extracted from attribute string
         """
         element_gtf = line_in_gtf.strip().split("\t")
@@ -174,7 +180,6 @@ class GTFitem(object):
         self._frame = element_gtf.pop(0)
         self._attributes = self.attribute2dict(gtf_attribute_string)
 
-
     def _check_attribute_string(self,gtf_attribute):
         if not gtf_attribute:
             # if nothing in attribute string
@@ -185,7 +190,6 @@ class GTFitem(object):
 
         if "transcript_id" not in gtf_attribute:
             raise No_transcript_id_in_gtf
-
 
     @staticmethod
     def attribute2dict(gtf_attribute):
@@ -248,18 +252,17 @@ class GTFitem(object):
 
 
 # CIRI data parser definition here
-
 CIRI_OUTPUT_FILE_HEADER = r'circRNA_ID      chr     circRNA_start   circRNA_end     #junction_reads SM_MS_SMS       #non_junction_reads     junction_reads_ratio    circRNA_type    gene_id junction_reads_ID'
 
 
 class CIRIEntry(object):
 
-    def __init__(self, strLine=""):
+    def __init__(self, string_line_in_ciri_output_format=""):
         """ construct an empty ciri entry or from a string.
-        :param strLine: optional, a single string line in CIRI output file, except file header
+        :param string_line_in_ciri_output_format: optional, a single string line in CIRI output file, except file header
         """
-        if strLine:
-            self._parse_line(strLine)
+        if string_line_in_ciri_output_format:
+            self._parse_line(string_line_in_ciri_output_format)
         else:
             self.id = ""
             self.chr = ""
@@ -291,19 +294,19 @@ class CIRIEntry(object):
         :param remove_chr :  boolean, since chr1 in UCSC is just 1 in Ensembl, this option decide whether should "chr" be removed
         """
         if remove_chr:
-            chrid = self.chr[3:]
+            chromesome_id = self.chr[3:]
         else:
-            chrid = self.chr
+            chromesome_id = self.chr
 
-        return "\t".join([chrid, self.start, self.end, self.id]).strip()
+        return "\t".join([chromesome_id, self.start, self.end, self.id]).strip()
 
-# fasta file operations
+# .fasta file operations
 class FastaEntry():
     def __init__(self):
         self.reset()
 
-    def setid(self, someid):
-        self._id = someid
+    def setid(self, some_given_id):
+        self._id = some_given_id
 
     def getid(self):
         return self._id
@@ -328,7 +331,7 @@ class FastaEntry():
         else:
             pass
 
-    def add_addapter(self, kmer_len=20):
+    def add_adapter(self, kmer_len=20):
         self.flush()
         # here , we think if kmer_len is bigger than the whole sequence is acceptable
         if not self._has_addapter:
@@ -344,10 +347,10 @@ class FastaEntry():
 
 def transform_fasta(fa, tmp_name, method_of_transform_fa_entry=str):
     with open(tmp_name, "w") as transformed:
-        with open(fa) as readfa:
+        with open(fa) as fasta_file_reader:
             coolie_fa_line = FastaEntry()
             while True:
-                current_line = readfa.readline().strip()
+                current_line = fasta_file_reader.readline().strip()
                 if current_line:
 
                     if current_line.startswith(">"):
@@ -365,22 +368,22 @@ def transform_fasta(fa, tmp_name, method_of_transform_fa_entry=str):
                     break
 
 
-def add_addapter_fa(fa_entry):
-    fa_entry.add_addapter()
+def add_adapter_fa(fa_entry):
+    fa_entry.add_adapter()
     return str(fa_entry)
 
 
-def do_convert_in_site(fa, yourmethod=str):
+def do_convert_in_site(fa, your_method=str):
     '''
      this step will replace the original fa file , use it with caution!!!
     :param fa:
-    :param yourmethod:
+    :param your_method:
     :return:
     '''
     import shutil
     name_formal, extent_formal = os.path.splitext(fa)
-    tmp_name = name_formal +"_tmp" + extent_formal
-    transform_fasta(fa, tmp_name, method_of_transform_fa_entry=yourmethod)
+    tmp_name = name_formal + "_tmp" + extent_formal
+    transform_fasta(fa, tmp_name, method_of_transform_fa_entry=your_method)
     shutil.move(tmp_name, fa)
 
 
@@ -389,7 +392,7 @@ def format_your_fasta(fasta):
     class NotSingleLineSequence(Exception):
         pass
 
-    def check_yourfile(fasta):
+    def check_your_file(fasta):
         with open(fasta) as readit:
             while True:
                 seq_line_this = readit.readline().strip()
@@ -402,10 +405,9 @@ def format_your_fasta(fasta):
                 else:
                     break
 
-
     # main part
     try:
-        check_yourfile(fasta)
+        check_your_file(fasta)
 
     except NotSingleLineSequence:
         # ok , transform it
@@ -413,9 +415,10 @@ def format_your_fasta(fasta):
 
     else:
         # do nothing
-        print "ok "
+        print("ok ")
 
 
+# todo: you need a interface for bed file
 # GTF file preparation here
 def do_make_gtf_for_circ_exon(gtf_file, ciri_output, output_gtf_path_name=""):
     try:
@@ -436,7 +439,6 @@ def do_make_gtf_for_circ_exon(gtf_file, ciri_output, output_gtf_path_name=""):
         artifical_exon.set_strand("+")
         return artifical_exon
 
-
     path_main , file_part = os.path.split(gtf_file)
 
     file_body_name, file_suffix = file_part.split(".")
@@ -455,7 +457,7 @@ def do_make_gtf_for_circ_exon(gtf_file, ciri_output, output_gtf_path_name=""):
     if not output_gtf_path_name:
         output_gtf_path_name = os.path.join(os.path.split(ciri_output)[0], os.path.split(ciri_output)[-1].split(".")[0] + ".gtf")
 
-    print "output file is :", output_gtf_path_name
+    print("output file is :", output_gtf_path_name)
 
     with open(ciri_output, "r") as read_ciri:
         read_ciri.readline()
@@ -524,11 +526,11 @@ def parse_parameters(cmd_args, short_option_definition, long_option_definition):
     else:
         return opts, args
 
+
 def build_cmd_gffread(gff_file, genomic_seqs, output_fasta, transcript_filter="CME"):
     gff_file = os.path.abspath(gff_file)
     genomic_seqs = os.path.abspath(genomic_seqs)
     output_fasta = os.path.abspath(output_fasta)
-
 
     cmds = [GFFREAD_CMD, gff_file, "-g", genomic_seqs]
 
@@ -565,14 +567,12 @@ def build_cmd_sailfish_quant(index_dir, libtype, unmated_seq="", mate1="", mate2
         quant_cmds = [SAILFISH_CMD, "quant", "-i", index_dir, "-l", libtype]
         return quant_cmds
 
-
     def add_args_pair_ends_read(mate1, mate2, quant_cmds):
         quant_cmds.append("-1")
         quant_cmds.append(mate1)
         quant_cmds.append("-2")
         quant_cmds.append(mate2)
         return quant_cmds
-
 
     def add_args_single_end_read(quant_cmds, unmated_seq):
         quant_cmds.append("-r")
@@ -583,7 +583,6 @@ def build_cmd_sailfish_quant(index_dir, libtype, unmated_seq="", mate1="", mate2
         quant_cmds.append("-o")
         quant_cmds.append(quant_dir)
         return quant_cmds
-
 
     quant_cmds = basic_quant_cmd(index_dir, libtype)
 
@@ -599,10 +598,10 @@ def build_cmd_sailfish_quant(index_dir, libtype, unmated_seq="", mate1="", mate2
     return quant_cmds
 
 
-
 def do_extract_classic_linear_transcript(gff, fasta, output):
     cmds = build_cmd_gffread(gff_file=gff, genomic_seqs=fasta, output_fasta=output)
     exec_this(cmds)
+
 
 def do_extract_circular_transcript(gff, fa, output):
     cmd = build_cmd_gffread(gff, fa, output, "")
@@ -610,7 +609,8 @@ def do_extract_circular_transcript(gff, fa, output):
 
 
 def do_add_addapt(fa):
-    do_convert_in_site(fa, add_addapter_fa)
+    do_convert_in_site(fa, add_adapter_fa)
+
 
 def do_combine_circular_fa(linear_fa, cirular_fa, whole_fa):
     # cmds = "cat %s %s > %s" % (linear_fa, cirular_fa, whole_fa)
@@ -622,6 +622,7 @@ def do_combine_circular_fa(linear_fa, cirular_fa, whole_fa):
         with open(cirular_fa) as read2:
             for line in read2:
                 output_lines.write(line)
+
 
 def do_make_index_sailfish(ref_transcripts, index_folder, kmer_len=None):
     if not os.path.exists(index_folder):
@@ -646,8 +647,7 @@ def do_quant_sailfish_pair_end(index_dir, libtype, mate1="", mate2="", quant_dir
     exec_this(cmds)
 
 
-#### todo you need a pipeline class, to contain all these variables
-class pipeline():
+class PipeLine():
     def __init__(self, list_console_cmd):
         self._customized_parameter = functools.partial(parse_parameters,
                                                        short_option_definition="c:g:a:r:1:2:o:k:h",
@@ -662,11 +662,9 @@ class pipeline():
         setting_map_of_opts = dict(opts)
         current_dir = os.path.abspath(os.curdir)
 
-
         if "-h" in setting_map_of_opts or "--help" in setting_map_of_opts:
-            print __doc__
+            print(__doc__)
             sys.exit(0)
-
 
         if "-g" in setting_map_of_opts and setting_map_of_opts["-g"]:
             self._genomic_seq = setting_map_of_opts["-g"]
@@ -701,7 +699,6 @@ class pipeline():
             print("illegal specification of sequencing reads file, exiting .....")
             sys.exit(-1)
 
-        ########=============
         self._kmer_len = 19
         if "-k" in setting_map_of_opts and setting_map_of_opts["-k"]:
             try:
@@ -722,7 +719,6 @@ class pipeline():
             # no CIRI means you have to do it with only linear transcription
             pass
 
-
     def process_the_pipe_line(self):
         # this the main part of perform the pipeline.
         if self._is_circ_isoform_provided and self._ciri_output:
@@ -732,9 +728,7 @@ class pipeline():
             tmpp("do the basic pipeline")
             self._basic_linear_pipeline()
 
-
     def _basic_linear_pipeline(self, linear_genomic_transcript="linear_transcript.fa"):
-
         linear_transcript_fasta_file_path = os.path.join(self._output_folder, linear_genomic_transcript)
         sailfish_index_folder_only_linear_transcript = os.path.join(self._output_folder, "index_only_linear")
         sailfish_quant_folder_only_linear_transcript = os.path.join(self._output_folder, "quant_only_linear")
@@ -786,9 +780,7 @@ class pipeline():
         do_convert_in_site(circular_only_transcript_fasta_file_path)
         do_add_addapt(circular_only_transcript_fasta_file_path)
 
-
         do_combine_circular_fa(linear_transcript_fasta_file_path, circular_only_transcript_fasta_file_path, whole_transcript_file_path)
-
 
         tmpp("make index for sailfish")
         do_make_index_sailfish(ref_transcripts=whole_transcript_file_path, index_folder=sailfish_index_folder_circular, kmer_len=self._kmer_len)
@@ -812,7 +804,7 @@ class pipeline():
 if __name__ == "__main__":
     import sys
     if len(sys.argv) < 2:
-        print __doc__
+        print(__doc__)
     else:
-        work_on_it = pipeline(sys.argv[1:])
+        work_on_it = PipeLine(sys.argv[1:])
         work_on_it.process_the_pipe_line()
