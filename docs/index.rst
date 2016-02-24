@@ -12,7 +12,7 @@ Contents:
    :maxdepth: 2
    
    main
-   
+   download
 
 Indices and tables
 ==================

@@ -42,12 +42,9 @@ for Saifish-cir run as well.
 Usage
 -----
 
-    python path/to/your/sailfish\_cir.py -g
-    path/to/your/genomic/sequence/foo.fa -a
-    path/to/your/annotation/bar.gtf -1 path/to/your/reads/mate1.fastq -2
-    /path/to/your/reads/mate2.fastq -o
-    /path/to/where/you/want/your/result -c
-    /path/to/your/CIRI/output/file
+::
+
+    python path/to/your/sailfish_cir.py -g path/to/your/genomic/sequence/foo.fa -a path/to/your/annotation/bar.gtf -1 path/to/your/reads/mate1.fastq -2 /path/to/your/reads/mate2.fastq -o /path/to/where/you/want/your/result -c /path/to/your/CIRI/output/file
 
 ::
 
@@ -76,7 +73,7 @@ Sailfish-cir output files can be found at a subdirectory named
 Notes
 -----
 
-1. gtf file In order to generate reference sequence of circular RNA
+1. .gtf file In order to generate reference sequence of circular RNA
    transcripts, a database of your genomic annotation will be build. It
    is recommended to create the database file manually with the suffix
    "db" and put it under the same directory of gtf file. Because the
@@ -99,29 +96,3 @@ Contact
 -------
 
 Musheng li (zerodel@126.com)
-
-File DownLoad
--------------
-
-Script files
-~~~~~~~~~~~~
-
-You can download the scripts by `click
-here <https://github.com/zerodel/sailfish-cir/archive/master.zip>`__. If
-you are familiar with git, use
-``git@github.com:zerodel/sailfish-cir.git`` .
-
-Example files
-~~~~~~~~~~~~~
-
-1. Genomic Annotation file `hg19 .gtf
-   file <https://mega.nz/#!spA1BYZS!ab7EEWilWhUsvp6LeAPic1ia32dkO049sN17OB3foww>`__
-   `binary gffutils database
-   file <https://mega.nz/#!5pYmXKwZ!Fxgr5nc2LncyTojDXR1jTxbBs4RyDmDBgglg55udCbM>`__
-2. Genome file `Genome
-   file <https://mega.nz/#!QpBkXArT!HCyijZK6av5MRCwFnPaf7OS0eHC8sRa3szTP5Tt_Qas>`__
-3. RNA-seq data
-   `mate1 <https://mega.nz/#!t9o2SLIJ!hlOsdJ2RC6XfvAHY1o6GD-KZ6PzPwGwjGmM7ORYXlSU>`__
-   `mate2 <https://mega.nz/#!Ulx2AQZa!G0Cu01LG3bE6z8WaiSP4gw5ohBEOgzfXtTJDulN0Az8>`__
-4. CIRI output file `CIRI output of RNA-seq data
-   above <https://mega.nz/#!JspGGBzA!316V2Y8OsBFedMctE2LU0RtGAaZdvCWfsF583gocsAI>`__
