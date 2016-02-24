@@ -12,8 +12,8 @@ Contents:
    :maxdepth: 2
    
    
-   main 
-   download 
+   main
+   
 
 Indices and tables
 ==================
