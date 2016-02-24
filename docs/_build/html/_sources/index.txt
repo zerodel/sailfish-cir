@@ -9,11 +9,11 @@ Welcome to documentation_for_sailfish_cir's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    
    
-   main
-   download
+   main 
+   download 
 
 Indices and tables
 ==================

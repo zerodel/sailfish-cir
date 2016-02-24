@@ -24,9 +24,11 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="documentation_for_sailfish_cir 0.1 documentation" href="index.html" />
+    <link rel="next" title="Script files" href="download.html" />
+    <link rel="prev" title="Welcome to documentation_for_sailfish_cir’s documentation!" href="index.html" />
    
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
   <body role="document">  
@@ -51,7 +53,7 @@ framework.</p>
 <h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
 <p>The following three tools should be installed before running this
 script.</p>
-<div class="highlight-python"><div class="highlight"><pre>1. Cufflinks
+<div class="highlight-python"><div class="highlight"><pre><span></span>1. Cufflinks
    Gffread,a part of Cufflinks Package, is used as sequnce extractor here.
 2. Sailfish
    Sailfish is used to quantify RNA expression here. Sailfish 0.7.0 or above is recommended.
@@ -64,7 +66,7 @@ enviroment, and paths of gffread and sailfish should be added to your
 <code class="docutils literal"><span class="pre">PATH</span></code> variable.</p>
 <p>Other than these scripts, you should provide the following data files
 for Saifish-cir run as well.</p>
-<div class="highlight-python"><div class="highlight"><pre>1. Your reads file in fasta/fastq format;
+<div class="highlight-python"><div class="highlight"><pre><span></span>1. Your reads file in fasta/fastq format;
 2. A CIRI output file.
 3. Genomic annotation file in .gtf format, and a single or multi-fasta file containing RNA sequences.
 </pre></div>
@@ -79,7 +81,7 @@ path/to/your/annotation/bar.gtf -1 path/to/your/reads/mate1.fastq -2
 /path/to/your/reads/mate2.fastq -o
 /path/to/where/you/want/your/result -c
 /path/to/your/CIRI/output/file</div></blockquote>
-<div class="highlight-python"><div class="highlight"><pre>-g  path to genomic sequence fasta file
+<div class="highlight-python"><div class="highlight"><pre><span></span>-g  path to genomic sequence fasta file
 -a  path to genomic annotation file, ie, .gtf or .gff files
 -r  path to your single-end sequencing reads file.
 -1  path to your pair-end reads, mate 1
@@ -90,7 +92,7 @@ path/to/your/annotation/bar.gtf -1 path/to/your/reads/mate1.fastq -2
 </pre></div>
 </div>
 <p>optional arguments:</p>
-<div class="highlight-python"><div class="highlight"><pre>-k  k-mer size used by sailfish to built index. default is 19
+<div class="highlight-python"><div class="highlight"><pre><span></span>-k  k-mer size used by sailfish to built index. default is 19
 --libtype   format string describing the library type of your reads. default is &quot;IU&quot;, [read more on libtype of Sailfish](http://sailfish.readthedocs.org/en/master/library_type.html)
 </pre></div>
 </div>
@@ -146,6 +148,8 @@ from high-throughput RNA-seq data. Submitted.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to documentation_for_sailfish_cir&#8217;s documentation!</a></li>
+      <li>Next: <a href="download.html" title="next chapter">Script files</a></li>
   </ul></li>
 </ul>
 </div>
@@ -177,8 +181,8 @@ from high-throughput RNA-seq data. Submitted.</p>
       &copy;2016, zerodel.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
       |
       <a href="_sources/main.txt"
