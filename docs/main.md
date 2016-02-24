@@ -27,8 +27,10 @@ Other than these scripts, you should provide the following data files for Saifis
 
 ## Usage ##
 
->	python path/to/your/sailfish_cir.py -g path/to/your/genomic/sequence/foo.fa -a path/to/your/annotation/bar.gtf -1 path/to/your/reads/mate1.fastq -2 /path/to/your/reads/mate2.fastq -o /path/to/where/you/want/your/result -c /path/to/your/CIRI/output/file
-
+    ```
+	python path/to/your/sailfish_cir.py -g path/to/your/genomic/sequence/foo.fa -a path/to/your/annotation/bar.gtf -1 path/to/your/reads/mate1.fastq -2 /path/to/your/reads/mate2.fastq -o /path/to/where/you/want/your/result -c /path/to/your/CIRI/output/file
+    ```
+    
     -g  path to genomic sequence fasta file
     -a  path to genomic annotation file, ie, .gtf or .gff files
     -r  path to your single-end sequencing reads file.
