@@ -9,7 +9,7 @@ Welcome to documentation_for_sailfish_cir's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
     main
     download

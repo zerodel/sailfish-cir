@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>&lt;no title&gt; &mdash; documentation_for_sailfish_cir 0.1 documentation</title>
+    <title>Introduction &mdash; documentation_for_sailfish_cir 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -36,106 +36,113 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <p>## Introduction ##</p>
-<p>Saifish-cir is a software tool for estimating the relative abundance of Circular RNA transcript from high-throughput RNA-seq data.</p>
-<p>It accepts [CIRI](<a class="reference external" href="https://sourceforge.net/projects/ciri/">https://sourceforge.net/projects/ciri/</a>) output to specify reference set of circular RNA transcripts in RNA-seq data, transforms circular transcripts to pseudo-linear transcripts, and then estimates the expression of RNA transcripts, both linear and circular, in [Sailfish](<a class="reference external" href="http://www.cs.cmu.edu/~ckingsf/software/sailfish/">http://www.cs.cmu.edu/~ckingsf/software/sailfish/</a>) framework.</p>
-<p>## Prerequisites ##</p>
-<p>The following three tools should be installed before running this script.</p>
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Saifish-cir is a software tool for estimating the relative abundance of
+Circular RNA transcript from high-throughput RNA-seq data.</p>
+<p>It accepts <a class="reference external" href="https://sourceforge.net/projects/ciri/">CIRI</a> output to
+specify reference set of circular RNA transcripts in RNA-seq data,
+transforms circular transcripts to pseudo-linear transcripts, and then
+estimates the expression of RNA transcripts, both linear and circular,
+in <a class="reference external" href="http://www.cs.cmu.edu/~ckingsf/software/sailfish/">Sailfish</a>
+framework.</p>
+</div>
+<div class="section" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
+<p>The following three tools should be installed before running this
+script.</p>
+<div class="highlight-python"><div class="highlight"><pre>1. Cufflinks
+   Gffread,a part of Cufflinks Package, is used as sequnce extractor here.
+2. Sailfish
+   Sailfish is used to quantify RNA expression here. Sailfish 0.7.0 or above is recommended.
+3. gffutils
+   This Python package is needed to build a database for your genomic annotation file.
+</pre></div>
+</div>
+<p>We assume that these pre-installed scripts are running under a Unix-like
+enviroment, and paths of gffread and sailfish should be added to your
+<code class="docutils literal"><span class="pre">PATH</span></code> variable.</p>
+<p>Other than these scripts, you should provide the following data files
+for Saifish-cir run as well.</p>
+<div class="highlight-python"><div class="highlight"><pre>1. Your reads file in fasta/fastq format;
+2. A CIRI output file.
+3. Genomic annotation file in .gtf format, and a single or multi-fasta file containing RNA sequences.
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div><ol class="arabic">
-<li><dl class="first docutils">
-<dt>Cufflinks</dt>
-<dd><p class="first last">Gffread,a part of Cufflinks Package, is used as sequnce extractor here.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>Sailfish</dt>
-<dd><p class="first last">Sailfish is used to quantify RNA expression here. Sailfish 0.7.0 or above is recommended.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>gffutils</dt>
-<dd><p class="first last">This Python package is needed to build a database for your genomic annotation file.</p>
-</dd>
-</dl>
-</li>
-</ol>
-</div></blockquote>
-<p>We assume that these pre-installed scripts are running under a Unix-like enviroment, and paths of gffread and sailfish should be added to your <code class="docutils literal"><span class="pre">PATH</span></code> variable.</p>
-<p>Other than these scripts, you should provide the following data files for Saifish-cir run as well.</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li>Your reads file in fasta/fastq format;</li>
-<li>A CIRI output file.</li>
-<li>Genomic annotation file in .gtf format, and a single or multi-fasta file containing RNA sequences.</li>
-</ol>
-</div></blockquote>
-<p>## Usage ##</p>
-<p>&gt;       python path/to/your/sailfish_cir.py -g path/to/your/genomic/sequence/foo.fa -a path/to/your/annotation/bar.gtf -1 path/to/your/reads/mate1.fastq -2 /path/to/your/reads/mate2.fastq -o /path/to/where/you/want/your/result -c /path/to/your/CIRI/output/file</p>
-<blockquote>
-<div><table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">-g</span></kbd></td>
-<td>path to genomic sequence fasta file</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-a</span></kbd></td>
-<td>path to genomic annotation file, ie, .gtf or .gff files</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-r</span></kbd></td>
-<td>path to your single-end sequencing reads file.</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-1</span></kbd></td>
-<td>path to your pair-end reads, mate 1</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-2</span></kbd></td>
-<td>path to your pair-end reads, mate 2</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-o</span></kbd></td>
-<td>output folder that contains your quantification results and the index built by sailfish</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-c</span></kbd></td>
-<td>path to CIRI output file to specify circular RNA</td></tr>
-</tbody>
-</table>
-<p>-h/&#8211;help   print this help message</p>
-</div></blockquote>
+<div>python path/to/your/sailfish_cir.py -g
+path/to/your/genomic/sequence/foo.fa -a
+path/to/your/annotation/bar.gtf -1 path/to/your/reads/mate1.fastq -2
+/path/to/your/reads/mate2.fastq -o
+/path/to/where/you/want/your/result -c
+/path/to/your/CIRI/output/file</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre>-g  path to genomic sequence fasta file
+-a  path to genomic annotation file, ie, .gtf or .gff files
+-r  path to your single-end sequencing reads file.
+-1  path to your pair-end reads, mate 1
+-2  path to your pair-end reads, mate 2
+-o  output folder that contains your quantification results and the index built by sailfish
+-c  path to CIRI output file to specify circular RNA
+-h/--help   print this help message
+</pre></div>
+</div>
 <p>optional arguments:</p>
-<blockquote>
-<div><table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">-k</span></kbd></td>
-<td>k-mer size used by sailfish to built index. default is 19
-&#8211;libtype   format string describing the library type of your reads. default is &#8220;IU&#8221;, [read more on libtype of Sailfish](<a class="reference external" href="http://sailfish.readthedocs.org/en/master/library_type.html">http://sailfish.readthedocs.org/en/master/library_type.html</a>)</td></tr>
-</tbody>
-</table>
-</div></blockquote>
-<p>## Output file  ##</p>
-<p>Sailfish-cir output files can be found at a subdirectory named <code class="docutils literal"><span class="pre">quant_circular</span></code> under the path set by <code class="docutils literal"><span class="pre">-o</span></code> parameter.</p>
-<p>## Notes ##</p>
-<p>1. gtf file
-In order to generate reference sequence of circular RNA transcripts, a database of your genomic annotation will be build. It is recommended to create the database file manually with the suffix &#8220;db&#8221; and put it under the same directory of gtf file.
-Because the format of gtf file changes after GRCH37.75. It will be very slow to build the database using the same option for earlier gtf version.</p>
-<p>2. CIRI file
-This script only supports CIRI outputs (CIRI v1.2) to specify the circular RNA isoforms for current version {2016/02/04}. File formats may change as CIRI updates, and other file formats will be supported soon.</p>
-<p>## Reference ##
-Musheng Li, Xueying Xie, Jing Zhou, Tong Zhou* and Wanjun Gu*(2016) Sailfish-cir: a model-based tool to quantify circular RNA expression from high-throughput RNA-seq data. Submitted.</p>
-<p>## Contact ##
-Musheng li (<a class="reference external" href="mailto:zerodel&#37;&#52;&#48;126&#46;com">zerodel<span>&#64;</span>126<span>&#46;</span>com</a>)</p>
+<div class="highlight-python"><div class="highlight"><pre>-k  k-mer size used by sailfish to built index. default is 19
+--libtype   format string describing the library type of your reads. default is &quot;IU&quot;, [read more on libtype of Sailfish](http://sailfish.readthedocs.org/en/master/library_type.html)
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-file">
+<h1>Output file<a class="headerlink" href="#output-file" title="Permalink to this headline">¶</a></h1>
+<p>Sailfish-cir output files can be found at a subdirectory named
+<code class="docutils literal"><span class="pre">quant_circular</span></code> under the path set by <code class="docutils literal"><span class="pre">-o</span></code> parameter.</p>
+</div>
+<div class="section" id="notes">
+<h1>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>gtf file In order to generate reference sequence of circular RNA
+transcripts, a database of your genomic annotation will be build. It
+is recommended to create the database file manually with the suffix
+&#8220;db&#8221; and put it under the same directory of gtf file. Because the
+format of gtf file changes after GRCH37.75. It will be very slow to
+build the database using the same option for earlier gtf version.</li>
+<li>CIRI file This script only supports CIRI outputs (CIRI v1.2) to
+specify the circular RNA isoforms for current version {2016/02/04}.
+File formats may change as CIRI updates, and other file formats will
+be supported soon.</li>
+</ol>
+</div>
+<div class="section" id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
+<p>Musheng Li, Xueying Xie, Jing Zhou, Tong Zhou* and Wanjun Gu*(2016)
+Sailfish-cir: a model-based tool to quantify circular RNA expression
+from high-throughput RNA-seq data. Submitted.</p>
+</div>
+<div class="section" id="contact">
+<h1>Contact<a class="headerlink" href="#contact" title="Permalink to this headline">¶</a></h1>
+<p>Musheng li (<a class="reference external" href="mailto:zerodel&#37;&#52;&#48;126&#46;com">zerodel<span>&#64;</span>126<span>&#46;</span>com</a>)</p>
+</div>
 
 
           </div>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#output-file">Output file</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+<li><a class="reference internal" href="#contact">Contact</a></li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
