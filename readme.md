@@ -2,7 +2,7 @@
 
 Saifish-cir is a software tool for estimating the relative abundance of Circular RNA transcript from high-throughput RNA-seq data.
 
-# Documentation #    
+# Documentation #
 
 [documents on readthedocs](http://sailfish-cir.readthedocs.org/en/latest/)
 
