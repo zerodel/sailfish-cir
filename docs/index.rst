@@ -10,9 +10,10 @@ Contents:
 
 .. toctree::
    :maxdepth: 1
-
-    main
-    download
+   
+   
+   main
+   download
 
 Indices and tables
 ==================
