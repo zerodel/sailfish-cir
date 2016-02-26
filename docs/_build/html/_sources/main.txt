@@ -1,7 +1,7 @@
 Introduction
 ------------
 
-Saifish-cir is a software tool for estimating the relative abundance of
+Sailfish-cir is a software tool for estimating the relative abundance of
 Circular RNA transcript from high-throughput RNA-seq data.
 
 It accepts `CIRI <https://sourceforge.net/projects/ciri/>`__ output to
@@ -88,9 +88,9 @@ Notes
 Reference
 ---------
 
-Musheng Li, Xueying Xie, Jing Zhou, Tong Zhou\* and Wanjun Gu\*(2016)
-Sailfish-cir: a model-based tool to quantify circular RNA expression
-from high-throughput RNA-seq data. Submitted.
+Musheng Li, Xueying Xie, Jing Zhou, Mengyin Sheng, Eun-A Ko, Tong Zhou\*
+and Wanjun Gu\*(2016) Sailfish-cir: a model-based tool to quantify
+circular RNA expression from high-throughput RNA-seq data. Submitted.
 
 Contact
 -------
