@@ -15,11 +15,11 @@ Example files
 
 These files are stored in `MEGA <https://mega.nz>`__
 
-1. Genomic Annotation file `hg19 .gtf
+1. Genomic Annotation file: `hg19 .gtf
    file <https://mega.nz/#!spA1BYZS!ab7EEWilWhUsvp6LeAPic1ia32dkO049sN17OB3foww>`__
-   `binary gffutils database
+   and `binary gffutils database
    file <https://mega.nz/#!5pYmXKwZ!Fxgr5nc2LncyTojDXR1jTxbBs4RyDmDBgglg55udCbM>`__
-2. Genome file `Genome
+2. Genome file: `Genome
    file <https://mega.nz/#!QpBkXArT!HCyijZK6av5MRCwFnPaf7OS0eHC8sRa3szTP5Tt_Qas>`__
 3. `Sailfish Linux
    binary <https://mega.nz/#!ck5HACZI!7FR0yH5a8vBVGn309CeZ4Y1Ytw5-IQp-1tzllZa2nu0>`__
