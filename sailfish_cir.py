@@ -241,9 +241,7 @@ class GTFitem(object):
         self.is_ensemble = yes_or_no
 
     def _attr2str(self):
-        attr_rebuild = "; ".join(['%s "%s"' % (key, self._attributes.get(key))
-          for key in self.sampleAttribute.strip().split()
-                                  if key in self._attributes.keys()])
+        attr_rebuild = "; ".join(['%s "%s"' % (key, self._attributes.get(key)) for key in self.sampleAttribute.strip().split() if key in self._attributes.keys()])
 
         if self.is_ensemble:
             return "%s;" % attr_rebuild
@@ -611,8 +609,9 @@ def do_extract_circular_transcript(gff, fa, output):
     exec_this(cmd)
 
 
-def do_add_addapt(fa):
+def do_add_addapt(fa, fa_name_after_decoration):
     do_convert_in_site(fa, add_adapter_fa)
+    os.rename(fa, fa_name_after_decoration)
 
 
 def do_combine_circular_fa(linear_fa, cirular_fa, whole_fa):
@@ -650,7 +649,7 @@ def do_quant_sailfish_pair_end(index_dir, libtype, mate1="", mate2="", quant_dir
     exec_this(cmds)
 
 
-class PipeLine():
+class PipeLine(object):
     def __init__(self, list_console_cmd):
         self._customized_parameter = functools.partial(parse_parameters,
                                                        short_option_definition="c:g:a:r:1:2:o:k:h",
@@ -762,7 +761,8 @@ class PipeLine():
     def _cicular_pipeline(self, linear_genomic_transcript="linear_transcript.fa"):
         linear_transcript_fasta_file_path = os.path.join(self._output_folder, linear_genomic_transcript)
         circular_only_annotation_exon_file_path = os.path.join(self._output_folder, "circular_only.gtf")
-        circular_only_transcript_fasta_file_path = os.path.join(self._output_folder, "circular_only_transcript.fa")
+        circular_only_transcript_raw_fasta_file_path = os.path.join(self._output_folder, "circular_only_transcript_raw.fa")
+        decorated_circular_transcript_fasta_file = os.path.join(self._output_folder, "circular_only_transcript.fa")
         whole_transcript_file_path = os.path.join(self._output_folder, "transcriptome_with_circular.fa")
 
         sailfish_index_folder_circular = os.path.join(self._output_folder, "index_circular")
@@ -773,17 +773,21 @@ class PipeLine():
             do_extract_classic_linear_transcript(self._annotation_file, self._genomic_seq, linear_transcript_fasta_file_path)
             do_convert_in_site(linear_transcript_fasta_file_path)
 
-        # prepare circular transcriptome fa file.
-
         tmpp("make a gtf for circular RNA")
-        do_make_gtf_for_circ_exon(self._annotation_file, self._ciri_output, circular_only_annotation_exon_file_path)
+        if not os.path.exists(circular_only_annotation_exon_file_path):
+            do_make_gtf_for_circ_exon(self._annotation_file, self._ciri_output, circular_only_annotation_exon_file_path)
+        else:
+            tmpp("already has a annotation file here")
 
-        tmpp("extract circular RNA transcriptome")
-        do_extract_circular_transcript(circular_only_annotation_exon_file_path, self._genomic_seq, circular_only_transcript_fasta_file_path)
-        do_convert_in_site(circular_only_transcript_fasta_file_path)
-        do_add_addapt(circular_only_transcript_fasta_file_path)
+        tmpp("extract circular RNA transcript")
+        if not os.path.exists(circular_only_transcript_raw_fasta_file_path):
+            do_extract_circular_transcript(circular_only_annotation_exon_file_path, self._genomic_seq, circular_only_transcript_raw_fasta_file_path)
+            do_convert_in_site(circular_only_transcript_raw_fasta_file_path)
+            do_add_addapt(circular_only_transcript_raw_fasta_file_path, decorated_circular_transcript_fasta_file)
+        else:
+            tmpp("already has a dot-fasta sequence file for circular RNA")
 
-        do_combine_circular_fa(linear_transcript_fasta_file_path, circular_only_transcript_fasta_file_path, whole_transcript_file_path)
+        do_combine_circular_fa(linear_transcript_fasta_file_path, decorated_circular_transcript_fasta_file, whole_transcript_file_path)
 
         tmpp("make index for sailfish")
         do_make_index_sailfish(ref_transcripts=whole_transcript_file_path, index_folder=sailfish_index_folder_circular, kmer_len=self._kmer_len)
