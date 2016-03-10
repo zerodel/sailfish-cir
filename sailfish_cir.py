@@ -366,10 +366,11 @@ def transform_fasta(fa, tmp_name, method_of_transform_fa_entry=str):
                     break
 
 
-def add_adapter_fa(fa_entry):
-    fa_entry.add_adapter()
-    return str(fa_entry)
-
+def add_adapter_fa(adapter_length):
+    def adapter_in_front(fa_entry):
+        fa_entry.add_adapter(kmer_len=adapter_length)
+        return str(fa_entry)
+    return adapter_in_front
 
 def do_convert_in_site(fa, your_method=str):
     '''
@@ -609,8 +610,8 @@ def do_extract_circular_transcript(gff, fa, output):
     exec_this(cmd)
 
 
-def do_add_addapt(fa, fa_name_after_decoration):
-    do_convert_in_site(fa, add_adapter_fa)
+def do_add_addapt(fa, fa_name_after_decoration, adapter_length):
+    do_convert_in_site(fa, add_adapter_fa(adapter_length))
     os.rename(fa, fa_name_after_decoration)
 
 
@@ -762,7 +763,7 @@ class PipeLine(object):
         linear_transcript_fasta_file_path = os.path.join(self._output_folder, linear_genomic_transcript)
         circular_only_annotation_exon_file_path = os.path.join(self._output_folder, "circular_only.gtf")
         circular_only_transcript_raw_fasta_file_path = os.path.join(self._output_folder, "circular_only_transcript_raw.fa")
-        decorated_circular_transcript_fasta_file = os.path.join(self._output_folder, "circular_only_transcript.fa")
+        decorated_circular_transcript_fasta_file = os.path.join(self._output_folder, "circular_only_transcript_decorated.fa")
         whole_transcript_file_path = os.path.join(self._output_folder, "transcriptome_with_circular.fa")
 
         sailfish_index_folder_circular = os.path.join(self._output_folder, "index_circular")
@@ -780,10 +781,10 @@ class PipeLine(object):
             tmpp("already has a annotation file here")
 
         tmpp("extract circular RNA transcript")
-        if not os.path.exists(circular_only_transcript_raw_fasta_file_path):
+        if not os.path.exists(decorated_circular_transcript_fasta_file):
             do_extract_circular_transcript(circular_only_annotation_exon_file_path, self._genomic_seq, circular_only_transcript_raw_fasta_file_path)
             do_convert_in_site(circular_only_transcript_raw_fasta_file_path)
-            do_add_addapt(circular_only_transcript_raw_fasta_file_path, decorated_circular_transcript_fasta_file)
+            do_add_addapt(circular_only_transcript_raw_fasta_file_path, decorated_circular_transcript_fasta_file, self._kmer_len -1)
         else:
             tmpp("already has a dot-fasta sequence file for circular RNA")
 
