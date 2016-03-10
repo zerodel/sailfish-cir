@@ -467,8 +467,9 @@ def do_make_gtf_for_circ_exon(gtf_file, ciri_output, output_gtf_path_name=""):
                 ciri_item = CIRIEntry(line.strip())
                 host_gene_id = ciri_item.gene_id
                 host_tran_id = ciri_item.id
-                # here , hg19 file seqname has 'chr' before the chromesome number . so get rid of it .
-                host_seqname  = ciri_item.chr[3:]
+                # here , hg19 file seqname has 'chr' before the chromesome number . so get rid of it .\
+                if len(host_seqname) > 3:
+                    host_seqname  = ciri_item.chr[3:]
 
                 if host_seqname and host_gene_id and host_tran_id and ciri_item.start and ciri_item.end and 'exon' == ciri_item.circRNA_type:
                     pass
@@ -651,7 +652,7 @@ class PipeLine():
     def __init__(self, list_console_cmd):
         self._customized_parameter = functools.partial(parse_parameters,
                                                        short_option_definition="c:g:a:r:1:2:o:k:h",
-                                                       long_option_definition=["libtype", "help"])
+                                                       long_option_definition=["libtype=", "help"])
 
         if list_console_cmd:
 
@@ -699,7 +700,7 @@ class PipeLine():
             print("illegal specification of sequencing reads file, exiting .....")
             sys.exit(-1)
 
-        self._kmer_len = 19
+        self._kmer_len = 21
         if "-k" in setting_map_of_opts and setting_map_of_opts["-k"]:
             try:
                 self._kmer_len = int(setting_map_of_opts["-k"])
