@@ -468,7 +468,7 @@ def do_make_gtf_for_circ_exon(gtf_file, ciri_output, output_gtf_path_name=""):
                 host_gene_id = ciri_item.gene_id
                 host_tran_id = ciri_item.id
                 # here , hg19 file seqname has 'chr' before the chromesome number . so get rid of it .\
-                if len(host_seqname) > 3:
+                if ciri_item.chr.startswith("chr"):
                     host_seqname  = ciri_item.chr[3:]
 
                 if host_seqname and host_gene_id and host_tran_id and ciri_item.start and ciri_item.end and 'exon' == ciri_item.circRNA_type:
