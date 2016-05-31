@@ -16,12 +16,16 @@ Example files
 These files are stored in `MEGA <https://mega.nz>`__
 
 1. Genomic Annotation file: `hg19 .gtf
-   file <https://mega.nz/#!spA1BYZS!ab7EEWilWhUsvp6LeAPic1ia32dkO049sN17OB3foww>`__
+   file <https://mega.nz/#!coZEBY5D!-w5VbydDbNFW4peA2yK3gYjX0kb7mUBdMlBII6HOtpg>`__
    and `binary gffutils database
-   file <https://mega.nz/#!5pYmXKwZ!Fxgr5nc2LncyTojDXR1jTxbBs4RyDmDBgglg55udCbM>`__
-2. Genome file: `Genome
-   file <https://mega.nz/#!QpBkXArT!HCyijZK6av5MRCwFnPaf7OS0eHC8sRa3szTP5Tt_Qas>`__
+   file <https://mega.nz/#!Z1QFHBYb!2lYvqCDzNXh6X1othSvPwA0NQb1RlhtMoHAqveOxmSM>`__
+2. Genome sequence file: `fasta
+   file <https://mega.nz/#!40JiUDJK!9oC5PSleQSZjgIlFWUaRODYKh5nYxIW_Lfexwlk9QJc>`__
 3. `Sailfish Linux
-   binary <https://mega.nz/#!ck5HACZI!7FR0yH5a8vBVGn309CeZ4Y1Ytw5-IQp-1tzllZa2nu0>`__
+   binary <https://mega.nz/#!hopk3IzA!7b39ya6xy9YlCYmnSDO9I6xXSEw8-PTlTiXxs7CE3UU>`__
 4. `a self-contained simulation
    dataset <https://mega.nz/#!FwhEgSoa!lE-vZ5Hv9Ib3UAEiNhoyUWvZfdgu5Md_OPMoYFDath8>`__
+5. `simulation dataset following real
+   distribution <https://mega.nz/#!AohTlQZT!69BBJSfze0cmDioRd9gBn0kdG125eivRyZBWMiw1buQ>`__
+   and
+   `scripts <https://mega.nz/#!NxwniILD!Ysmy4ybcZaQUfx9pe2h6Rsysn5vZDodiVynkONJSgEs>`__
