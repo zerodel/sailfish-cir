@@ -63,7 +63,7 @@ Since gffutils don't guess GTF file format ,and GTF format changes after GRCH37.
 
 2. CIRI file , or BED file
 
-    This script now accept CIRI outputs (CIRI v1.2) or BED file to specify the circular RNA locus. It also provides a small utility to convert CIRI output to BED file.
+    This script now accept CIRI outputs (CIRI v1.2) or BED file to specify the circular RNA locus, but not both format at the same time .It provides a small utility to convert CIRI output to BED file.
 usage as follows:
     ```
     python path/to/your/sailfish_cir.py convert your/CIRI/output/file
