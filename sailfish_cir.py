@@ -21,31 +21,33 @@ Usage: python sailfish_cir.py [options]
 Options:
 
     -g  path to genomic sequence fasta file
-    -a  path to genomic annotation file, ie, .gtf or .gff files
-    -r  path to your single-end sequencing reads file.
-    -1  path to your pair-end reads , mate 1
-    -2  path to your pair-end reads, mate 2
-    -o  output folder that contains your quantification results
-    -k  K-mer size used by sailfish to built index.
-    --libtype   format string describing the library type of your reads.
-    -h/--help   print this help message
-    -c  path to CIRI output file to specify circular RNA, if provided, the -o result will contain estimation of circular transcript as well as linear ones.
+    -a  path to gene annotation file, ie, .gtf or .gff files
+    -r  path to single-end raw sequencing reads file.
+    -1  path to raw pair-end reads, mate 1
+    -2  path to raw pair-end reads, mate 2
+    -c  path to CIRI output file to specify circular RNA
     --bed  path to bed file which contains circular RNA.
-
+    -o  output folder that contains the index built by sailfish and quantification results
+    -k  k-mer size used by sailfish to built index. default is 21
+	--libtype   format string describing the library type of your reads. default is "IU", [read more on libtype of Sailfish](http://sailfish.readthedocs.org/en/master/library_type.html)
     --mll mean library length, this option is to fix up the effective length.
+    -h/--help	print this help message
+
 
     other:
     python sailfish_cir_alpha.py convert foo.output
-    this will convert this ciri output file into foo.bed and foo.mapping , the latter file contains information of
-     circular RNA-host gene mapping
+    this will convert this ciri output file into foo.bed and foo.mapping , the latter file contains information of circular RNA-host gene mapping
 '''
+
+
+
+
+
 
 #    todo: under development:
 #    --genemap file to specify the transcript-gene mapping
 #    --isoform switch whether to reveal the structure
 #
-
-
 
 __author__ = 'zerodel'
 
