@@ -9,12 +9,12 @@ It accepts [CIRI](https://sourceforge.net/projects/ciri/) output or a BED-format
 
 The following three tools should be installed before running Sailfish-cir.
 	
-    1. Cufflinks (http://cole-trapnell-lab.github.io/cufflinks/)
-	   Gffread,a part of Cufflinks Package, is used to extract sequence.
-    2. Sailfish (http://www.cs.cmu.edu/~ckingsf/software/sailfish/)
-	   Sailfish is used to quantify RNA expression. Sailfish 0.7.0 or above is recommended.
-    3. gffutils (https://pypi.python.org/pypi/gffutils)
-	   gffutils is used to build a database for reference set of all RNA transcripts.
+    1. Cufflinks 
+	   Gffread, a part of Cufflinks Package (http://cole-trapnell-lab.github.io/cufflinks/), is used to extract sequence.
+    2. Sailfish 
+	   Sailfish (http://www.cs.cmu.edu/~ckingsf/software/sailfish/) is used to quantify RNA expression. Sailfish 0.7.0 or above is recommended.
+    3. gffutils 
+	   gffutils (https://pypi.python.org/pypi/gffutils) is used to build a database for reference set of all RNA transcripts.
 	
 We assume these pre-installed tools are running under a Unix-like environment, and paths of gffread and sailfish binary executive should be added to your ``PATH`` variable.
 
