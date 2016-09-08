@@ -971,6 +971,7 @@ class PipeLineQuantification():
         # give the circular prediction result.
         self._is_circ_isoform_provided = False
 
+        self._bed_file = ""
         if "-c" in setting_map_of_opts and setting_map_of_opts["-c"]:
             self._is_circ_isoform_provided = True
             self._ciri_output = setting_map_of_opts["-c"]
@@ -1001,7 +1002,7 @@ class PipeLineQuantification():
     def process_the_pipe_line(self):
         # this the main part of perform the pipeline.
         if self._is_circ_isoform_provided:
-                self._cicular_pipeline()
+                self._circular_pipeline()
         else:
             tmpp("do the basic pipeline")
             self._basic_linear_pipeline()
@@ -1034,7 +1035,7 @@ class PipeLineQuantification():
                                          single_end_seq_read=self._single_end_read_file_path,
                                          quant_dir=sailfish_quant_folder_only_linear_transcript)
 
-    def _cicular_pipeline(self, linear_genomic_transcript="linear_transcript.fa"):
+    def _circular_pipeline(self, linear_genomic_transcript="linear_transcript.fa"):
         linear_transcript_fasta_file_path = os.path.join(self._output_folder, linear_genomic_transcript)
         circular_only_annotation_exon_file_path = os.path.join(self._output_folder, "circular_only.gtf")
         circular_only_transcript_raw_fasta_file_path = os.path.join(self._output_folder, "circular_only_transcript_raw.fa")
