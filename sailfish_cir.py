@@ -599,8 +599,7 @@ class PredictedCircularRegion(object):
 
             exon_filtered.append((exon_seqid, exon_source, exon_start, exon_end, exon_strand, exon_frame))
 
-
-        artifical_exons = []
+        artificial_exons = []
         if len(self.predict_id.split("@")) == 2:
             transcript_id, gene_id = self.predict_id.split("@")
         else:
@@ -609,7 +608,7 @@ class PredictedCircularRegion(object):
 
         for exon_locus in exon_filtered:
             exon_seqid, exon_source, exon_start, exon_end, exon_strand, exon_frame = exon_locus
-            artifical_exons.append(self.generate_exon_for_circular_isoform(host_seqname=exon_seqid,
+            artificial_exons.append(self.generate_exon_for_circular_isoform(host_seqname=exon_seqid,
                                                                            start=exon_start,
                                                                            end=exon_end,
                                                                            host_gene_id=gene_id,
@@ -619,11 +618,11 @@ class PredictedCircularRegion(object):
                                                                             )
                                    )
 
-        return artifical_exons
+        return artificial_exons
 
 
     def mark_extracted_exons(self, dict_transcript_exon):
-        # this funciton is after the extract_flanked.... function
+        # this function is after the extract_flanked.... function
 
         marked_exons = []
         for transcript_id in dict_transcript_exon.keys():
