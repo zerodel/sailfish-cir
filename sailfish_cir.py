@@ -353,7 +353,7 @@ class FastaEntry(object):
         return self._id
 
     def is_adapter_added(self):
-        return self._has_addapter
+        return self._has_adapter
 
     def is_effective_length_fixed(self):
         return self._has_effective_length_fixed
@@ -362,7 +362,7 @@ class FastaEntry(object):
         self._id = ""
         self._seq_string = ""
         self._seq_items = []
-        self._has_addapter = False
+        self._has_adapter = False
         self._has_effective_length_fixed = False
 
     def add_seq_part(self, line):
@@ -379,9 +379,9 @@ class FastaEntry(object):
     def add_adapter(self, kmer_len=20):
         self.shrink()
         # here , we think if kmer_len is bigger than the whole sequence is acceptable
-        if not self._has_addapter:
+        if not self._has_adapter:
             self._seq_string = "%s%s" % (self._seq_string[-kmer_len:], self._seq_string)
-            self._has_addapter = True
+            self._has_adapter = True
         else:
             pass
 
@@ -563,17 +563,17 @@ class PredictedCircularRegion(object):
 
     @staticmethod
     def generate_exon_for_circular_isoform(host_seqname, start, end, host_gene_id, host_tran_id, strand="+", frame="."):
-        artifical_exon = GTFitem()
-        artifical_exon.set_start(int(start))
-        artifical_exon.set_end(int(end))
-        artifical_exon.set_gene_id(host_gene_id)
-        artifical_exon.set_transcript_id(host_tran_id)
-        artifical_exon.set_seqname(host_seqname)
-        artifical_exon.set_source("ciri")
-        artifical_exon.set_feature("exon")
-        artifical_exon.set_strand(strand)
-        artifical_exon.set_frame(frame)
-        return artifical_exon
+        artificial_exon = GTFitem()
+        artificial_exon.set_start(int(start))
+        artificial_exon.set_end(int(end))
+        artificial_exon.set_gene_id(host_gene_id)
+        artificial_exon.set_transcript_id(host_tran_id)
+        artificial_exon.set_seqname(host_seqname)
+        artificial_exon.set_source("ciri")
+        artificial_exon.set_feature("exon")
+        artificial_exon.set_strand(strand)
+        artificial_exon.set_frame(frame)
+        return artificial_exon
 
     def arrange_exons_the_naive_way(self, db):
         # find all exons and put theme together , that's all, and here we assume that region id follow pattern like "id@gene"
@@ -598,6 +598,8 @@ class PredictedCircularRegion(object):
                 exon_end = self.end
 
             exon_filtered.append((exon_seqid, exon_source, exon_start, exon_end, exon_strand, exon_frame))
+
+        exon_filtered = sorted(exon_filtered, key=lambda x: x[2])
 
         artificial_exons = []
         if len(self.predict_id.split("@")) == 2:
@@ -635,19 +637,19 @@ class PredictedCircularRegion(object):
 
 
 def simplify_this_feature(feature_from_gffutils_db, new_source="", new_transcript_id=""):
-    artifical_exon = GTFitem(str(feature_from_gffutils_db))
-    formal_gene_id = artifical_exon.get_gene_id()
-    formal_trans_id = artifical_exon.get_transcript_id()
-    artifical_exon.init_null_attribute()
-    artifical_exon.set_gene_id(formal_gene_id)
-    artifical_exon.set_transcript_id(formal_trans_id)
+    artificial_exon = GTFitem(str(feature_from_gffutils_db))
+    formal_gene_id = artificial_exon.get_gene_id()
+    formal_trans_id = artificial_exon.get_transcript_id()
+    artificial_exon.init_null_attribute()
+    artificial_exon.set_gene_id(formal_gene_id)
+    artificial_exon.set_transcript_id(formal_trans_id)
 
     if new_source:
-        artifical_exon.set_source(new_source)
+        artificial_exon.set_source(new_source)
     if new_transcript_id:
-        artifical_exon.set_transcript_id(new_transcript_id)
+        artificial_exon.set_transcript_id(new_transcript_id)
 
-    return artifical_exon
+    return artificial_exon
 
 
 def mark_permutate_exon(some_feature):
@@ -861,7 +863,7 @@ def do_extract_circular_transcript(gff, fa, output):
     exec_this(cmd)
 
 
-def do_add_addapt(fa, fa_name_after_decoration, adapter_length):
+def do_add_adapter(fa, fa_name_after_decoration, adapter_length):
     do_convert_in_site(fa, add_adapter_fa(adapter_length))
     os.rename(fa, fa_name_after_decoration)
 
@@ -869,15 +871,13 @@ def do_make_up_for_effective_length(fa_name_before, length_for_effective_length)
     do_convert_in_site(fa_name_before, pad_for_effective_length(length_for_effective_length))
 
 def do_combine_files(file_1, file_2, file_output):
-    # cmds = "cat %s %s > %s" % (linear_fa, cirular_fa, whole_fa)
-    # os.system(cmds)
     with open(file_output, "w") as output_lines:
         with open(file_1) as read1:
             for line in read1:
-                output_lines.write(line)
+                output_lines.write("%s\n" % line.strip())
         with open(file_2) as read2:
             for line in read2:
-                output_lines.write(line)
+                output_lines.write("%s\n" % line.strip())
 
 
 def do_make_index_sailfish(ref_transcripts, index_folder, kmer_len=None):
@@ -1074,7 +1074,7 @@ class PipeLineQuantification():
         if not os.path.exists(decorated_circular_transcript_fasta_file):
             do_extract_circular_transcript(circular_only_annotation_exon_file_path, self._genomic_seq, circular_only_transcript_raw_fasta_file_path)
             do_convert_in_site(circular_only_transcript_raw_fasta_file_path)
-            do_add_addapt(circular_only_transcript_raw_fasta_file_path, decorated_circular_transcript_fasta_file, self._kmer_len -1)
+            do_add_adapter(circular_only_transcript_raw_fasta_file_path, decorated_circular_transcript_fasta_file, self._kmer_len - 1)
 
             if self.need_to_pad and self.mean_library_length > self._kmer_len - 1:
                 # todo : pad some random seq to complete the length
