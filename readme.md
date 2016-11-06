@@ -31,18 +31,24 @@ Other than above third party tools, several data files are required for Sailfish
 python path/to/your/sailfish_cir.py -g path/to/your/genomic/sequence/foo.fa -a path/to/your/annotation/bar.gtf -1 path/to/your/reads/mate1.fastq -2 /path/to/your/reads/mate2.fastq -o /path/to/where/you/want/your/result -c /path/to/your/CIRI/output/file
 ```
     
+
     -g  path to genomic sequence fasta file
     -a  path to gene annotation file, ie, .gtf or .gff files
     -r  path to single-end raw sequencing reads file.
     -1  path to raw pair-end reads, mate 1
     -2  path to raw pair-end reads, mate 2
+    
     -c  path to CIRI output file to specify circular RNA
     --bed  path to bed file which contains circular RNA.
+    --circRNA_finder path to circRNA_finder output file.
+    --KNIFE_report_folder path to KNIFE output folder, make sure it has the subdirectory "circReads"
+    
     -o  output folder that contains the index built by sailfish and quantification results
-    -k  k-mer size used by sailfish to built index. default is 21
+    -k  minimum match size used during sailfish quantification,   default is 21
 	--libtype   format string describing the library type of your reads. default is "IU", [read more on libtype of Sailfish](http://sailfish.readthedocs.org/en/master/library_type.html)
     --mll mean library length, this option is to fix up the effective length.
     -h/--help	print this help message
+
     
 
     
@@ -57,16 +63,22 @@ Sailfish-cir expression estimats can be found at a subdirectory named ``quant_ci
 
     In order to generate reference sequences of circular RNA transcripts, a database of your genomic annotation is needed. It is recommended to create the database file manually using the same filename with extension ".db" in the same directory. Since gffutils don't guess GTF file format, and GTF format was changed after GRCH37.75. It will be time-consuming when building the database using the same option for earlier gtf version. 
 
-2. CIRI output file or BED-format file
+2. output file from circRNA identification tools
 
-    This script accepts CIRI outputs (CIRI v1.2) or BED-format file to specify the circular RNA transcripts, but not both format at the same time. We also provide a small utility to convert CIRI outputs to a BED-format file.
+    This script accepts BED-format file or output files of circRNA identification tools (CIRI, circRNA_finder, KNIFE are supported) to specify the circular RNA transcripts. 
+    
+    We also provide a small utility to convert those outputs to a BED-format file.
 usage as follows:
     ```
-    python path/to/your/sailfish_cir.py convert your/CIRI/output/file
+    python path/to/your/sailfish_cir.py convert_CIRI your/CIRI/output/file
+    python path/to/your/sailfish_cir.py convert_KNIFE your/KNIFE/output/folder
     ```
    
-    This will create a .bed file and a .mapping file (a tab-delimited file contains circular RNA name and its host gene in each line) in the same folder. 
-
+    For CIRI, this will create a .bed file and a .mapping file (a tab-delimited file contains circular RNA name and its host gene in each line) in the same folder. 
+    For KNIFE, this will create a "summarized_knife_junction.bed" under your KNIFE output folder.
+    circRNA_finder output is actually BED-format.
+    
+    If you want to quantify circRNA from multiple circRNA detection results, convert those output files into BED format and merge them into a single .bed file, then use "--bed" option. 
 
 ## ChangeLog ##
 
