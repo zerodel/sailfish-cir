@@ -104,15 +104,37 @@ Example files are available in [MEGA](https://mega.nz)
 3. Sailfish (ver 0.9.0): [Sailfish Linux binary](https://mega.nz/#!hopk3IzA!7b39ya6xy9YlCYmnSDO9I6xXSEw8-PTlTiXxs7CE3UU)
 4. RNA-seq simulation scripts [simulation](https://mega.nz/#!NxwniILD!Ysmy4ybcZaQUfx9pe2h6Rsysn5vZDodiVynkONJSgEs) 
 5. Simulated RNA-seq datasets 
-[11 simulated datasets (uniform expresion distribution)](https://mega.nz/#!FwhEgSoa!lE-vZ5Hv9Ib3UAEiNhoyUWvZfdgu5Md_OPMoYFDath8)
-[one simulated dataset (empirical expression distribution)](https://mega.nz/#!AohTlQZT!69BBJSfze0cmDioRd9gBn0kdG125eivRyZBWMiw1buQ) 
-[uniform sequencing error with error rate 0.01](https://mega.nz/#!oh4VlTaJ!6Dt3_vENKRbWH2Jc2uIwe3ne0bYDVtrVp3DFThlU44g) 
-[uniform sequencing error with error rate 0.02](https://mega.nz/#!cwREQRLb!x5dm81OHhkx5CCVyiMeZcXtYE54dyNZHA1D5FU0sVWg) 
-[empirical error model: illumina 4](https://mega.nz/#!RggSSDJZ!jtVKO78aLLKzNne-5FRhTj7fX_sToVflWIgYtaXKlz4)
-[empirical error model: illumina 5](https://mega.nz/#!pphAECAY!yHMgVI9h3B5pcYd1Aaj3AQLgkFjeWjHdQX6CbA-cdmo)
-[simulation size two fold](https://mega.nz/#!gkZgHLza!wXOL58ioIODUhHq-sq-5-RXyY-YXzWOsGE61HHP9K4Y)
-[simulation size 4 fold](https://mega.nz/#!ApIB1DZJ!lMsh7SL6MLKyWph0cAGzhkazwBtNLMQTt2QQwkoNUls)
-[simulation using whole genome](https://mega.nz/#!d4RCTTII!hhGW_2dky-7sZW4Z8t5330oiKNVeV6D7M8BFEUDaZe8)
+    [11 simulated datasets (uniform expresion distribution)](https://mega.nz/#!FwhEgSoa!lE-vZ5Hv9Ib3UAEiNhoyUWvZfdgu5Md_OPMoYFDath8)
+    
+    [one simulated dataset (empirical expression distribution)](https://mega.nz/#!AohTlQZT!69BBJSfze0cmDioRd9gBn0kdG125eivRyZBWMiw1buQ)
+     
+    [uniform sequencing error with error rate 0.01](https://mega.nz/#!oh4VlTaJ!6Dt3_vENKRbWH2Jc2uIwe3ne0bYDVtrVp3DFThlU44g), [script and other files](
+    https://mega.nz/#!VhJizLbC!VwEuYSiYhyrXLTT35dWbwgC2R66PjxKPZpjurlb8nwo
+    )
+    
+    [uniform sequencing error with error rate 0.02](https://mega.nz/#!cwREQRLb!x5dm81OHhkx5CCVyiMeZcXtYE54dyNZHA1D5FU0sVWg), [script and other files](
+    https://mega.nz/#!YtAjTYjL!m-NYPeXT0hTq4s3JHPrhIZDPKNv9g4VNuvXuO1P2I4Q
+    )
+    
+    [empirical error model: illumina 4](https://mega.nz/#!RggSSDJZ!jtVKO78aLLKzNne-5FRhTj7fX_sToVflWIgYtaXKlz4), [script and other files](
+    https://mega.nz/#!4tByhYqA!e2K_LCjEVWHLSrKy0vWBk8xmV3l9rnvygsqN7NhkONo
+    )
+    
+    [empirical error model: illumina 5](https://mega.nz/#!pphAECAY!yHMgVI9h3B5pcYd1Aaj3AQLgkFjeWjHdQX6CbA-cdmo), [script and other files](
+    https://mega.nz/#!oxRCGD4S!QgVdxQ-qJsDm2GLloggxvfEnN5FZsCJ7cYEewiGMV_M
+    )
+    
+    [simulation size two fold](https://mega.nz/#!gkZgHLza!wXOL58ioIODUhHq-sq-5-RXyY-YXzWOsGE61HHP9K4Y), [script and other files](
+    https://mega.nz/#!t8oEib5C!3X15kL_QwGiUDKXkWN8TE9bnenhy9oaORXza_M__GkE
+    )
+    
+    [simulation size 4 fold](https://mega.nz/#!ApIB1DZJ!lMsh7SL6MLKyWph0cAGzhkazwBtNLMQTt2QQwkoNUls), [script and other files](
+    https://mega.nz/#!w04xhC6D!u99vNrS-yo11-wLoxelPHn5FHpPVj0u0Lu6Ep3gyRSI
+    )
+    
+    [simulation using whole genome](https://mega.nz/#!d4RCTTII!hhGW_2dky-7sZW4Z8t5330oiKNVeV6D7M8BFEUDaZe8), [script and other files](
+    https://mega.nz/#!ZowwXbDS!GFahcBsSyAb8Sd5COlN494i3hUAj2-Ilf25UB14TtDY
+    )
 
 
 ## Reference ##
