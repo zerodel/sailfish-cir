@@ -2,7 +2,7 @@
 
 Sailfish-cir is a computational tool to estimate the relative abundance of circular RNA transcripts from high-throughput RNA-seq data.
 
-It accepts [CIRI](https://sourceforge.net/projects/ciri/) output or a BED-format file to specify the reference set of circular RNA transcripts in RNA-seq data. Then, it transforms all circular transcripts to pseudo-linear transcripts. Finally, it estimates the expression of both linear and circular transcripts using [Sailfish](http://www.cs.cmu.edu/~ckingsf/software/sailfish/) framework. 
+It accepts  output of circRNA identification tools ([CIRI](https://sourceforge.net/projects/ciri/), [KNIFE](https://github.com/lindaszabo/KNIFE), [circRNA_finder](https://github.com/orzechoj/circRNA_finder)) or a BED-format file to specify the reference set of circular RNA transcripts in RNA-seq data. Then, it transforms all circular transcripts to pseudo-linear transcripts. Finally, it estimates the expression of both linear and circular transcripts using [Sailfish](http://www.cs.cmu.edu/~ckingsf/software/sailfish/) framework. 
 
 
 ## Prerequisites ##

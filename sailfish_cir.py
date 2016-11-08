@@ -380,11 +380,11 @@ class FastaEntry(object):
         else:
             pass
 
-    def pad_for_effective_length(self, length_needed):
+    def pad_for_effective_length(self, length_needed, is_N=False):
         self.shrink()
 
         #nts = "".join([random.choice("ACGT") for i in range(length_needed)])
-        nts = "".join(["N" for i in range(length_needed)])
+        nts = "".join(["N" for i in range(length_needed)]) if is_N else "".join([random.choice("ACGT") for i in range(length_needed)])
 
         if self._seq_string and  not self._has_effective_length_fixed:
             self._seq_string = "%s%s" % (nts, self._seq_string)
