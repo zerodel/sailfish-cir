@@ -138,8 +138,7 @@ Example files are available in [MEGA](https://mega.nz)
 
 
 ## Reference ##
-Musheng Li, Xueying Xie, Jing Zhou, Mengyin Sheng, Xiaofeng Yin, Eun-A Ko, Tong Zhou* and Wanjun Gu*(2016) Sailfish-cir: a model-based tool to quantify circular RNA expression from high-throughput RNA-seq data. Submitted.
-
+Musheng  Li,  Xueying  Xie,  Jing  Zhou,  Mengying Sheng,  Xiaofeng  Yin,  Eun-A  Ko,  Tong Zhou* and Wanjun Gu*. Quantifying  circular  RNA  expression  from RNA-seq  data using model-based framework. Bioinformatics, 2017, in press.
 
 ## Contact ##
 Musheng Li (zerodel@126.com)
