@@ -13,7 +13,7 @@ The following three tools should be installed before running Sailfish-cir.
        Sailfish (http://www.cs.cmu.edu/~ckingsf/software/sailfish/) is used to quantify RNA expression. Sailfish 0.7.0 or above is recommended.
 
     2. gffread
-	   gffread (https://github.com/gpertea/gffread), GFF/GTF parsing utility , is used to extract sequence.
+	   gffread is part of Cufflinks (http://cole-trapnell-lab.github.io/cufflinks/). This GFF/GTF parsing utility is used to extract sequence.
 
     3. gffutils 
 	   gffutils (https://pypi.python.org/pypi/gffutils) is used to build a database for reference set of all RNA transcripts.
