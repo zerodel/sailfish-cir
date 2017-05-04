@@ -9,10 +9,12 @@ It accepts  output of circRNA identification tools ([CIRI](https://sourceforge.n
 
 The following three tools should be installed before running Sailfish-cir.
 	
-    1. Cufflinks 
-	   Gffread, a part of Cufflinks Package (http://cole-trapnell-lab.github.io/cufflinks/), is used to extract sequence.
-    2. Sailfish 
-	   Sailfish (http://www.cs.cmu.edu/~ckingsf/software/sailfish/) is used to quantify RNA expression. Sailfish 0.7.0 or above is recommended.
+    1. Sailfish
+       Sailfish (http://www.cs.cmu.edu/~ckingsf/software/sailfish/) is used to quantify RNA expression. Sailfish 0.7.0 or above is recommended.
+
+    2. gffread
+	   gffread (https://github.com/gpertea/gffread), GFF/GTF parsing utility , is used to extract sequence.
+
     3. gffutils 
 	   gffutils (https://pypi.python.org/pypi/gffutils) is used to build a database for reference set of all RNA transcripts.
 	
@@ -74,7 +76,7 @@ usage as follows:
     python path/to/your/sailfish_cir.py convert_KNIFE your/KNIFE/output/folder
     ```
    
-    For CIRI, this will create a .bed file and a .mapping file (a tab-delimited file contains circular RNA name and its host gene in each line) in the same folder. 
+    For CIRI, this will create a .bed file in the same folder. the 'name' (4th) column  follows this  "circular_transcript@host_gene" pattern.
     For KNIFE, this will create a "summarized_knife_junction.bed" under your KNIFE output folder.
     circRNA_finder output is actually BED-format.
     
