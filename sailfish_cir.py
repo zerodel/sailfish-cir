@@ -318,7 +318,7 @@ class CIRIEntry(object):
                 self.obj = CIRI1(**dict(zip(slots_v1, line_parts)))
 
             elif len(line_parts) == len(slots_v2):  # v2
-                self.obj = CIRI2(**dict(zip(slots_v1, line_parts)))
+                self.obj = CIRI2(**dict(zip(slots_v2, line_parts)))
             else:
                 raise ValueError("Error: wrong CIRI format : {}".format(line_parts[0]))
         else:
