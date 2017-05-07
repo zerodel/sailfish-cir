@@ -38,8 +38,8 @@ Options:
 
 
     other:
-    python sailfish_cir_alpha.py convert foo.output
-    this will convert this ciri output file into foo.bed and foo.mapping , the latter file contains information of circular RNA-host gene mapping
+    python sailfish_cir.py convert_CIRI ciri.output
+    this will convert this ciri output file into foo.bed
 '''
 
 #
